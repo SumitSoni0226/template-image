@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import Header from "./commonComponents/header"
+import Footer from "./commonComponents/footer"
+import AllQuestions from './components/questions';
+import InputData from './components/InputData';
+import { useState } from 'react';
 
 function App() {
+  const [posts, setPosts] = useState([]);
+
+  function submitHnadler(newPost) {
+    const allPosts = [...posts, newPost]
+    setPosts(allPosts);
+  }
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <Header />
+      <InputData submitHandler={submitHnadler} />
+      <AllQuestions posts={posts} />
+      <Footer />
     </div>
   );
 }

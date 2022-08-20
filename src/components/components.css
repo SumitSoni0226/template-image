@@ -1,0 +1,20 @@
+.AllQuestions {
+    display: flex;
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid black;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.Question{
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid black;
+}
+
+.InputData{
+    margin: 10px;
+    padding: 10px;
+    border: 2px solid black;
+}
