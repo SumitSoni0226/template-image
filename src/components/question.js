@@ -2,7 +2,7 @@ import './components.css';
 // import image from "../001.jpg"
 import { useRef, useEffect, useState } from 'react'
 
-function Question({ id }) {
+function Question({ id, data }) {
     console.log(id);
     // const [canvas, setCanvas] = useState(null);
     const shouldLoad = useRef(true);
@@ -34,29 +34,30 @@ function Question({ id }) {
         var imageObj = new Image();
 
         imageObj.onload = function () {
-            //   var destX = canvas.width / 2 - this.width / 2;
-            //   var destY = canvas.height / 2 - this.height / 2;
-            ctx.drawImage(this, 500, 500);
+            ctx.drawImage(this, 0, 0, 500, 500);
+            ctx.font = "50px Roboto";
+            ctx.fillStyle = "white";
+            ctx.fillText(data, 10, 50);
         }
         imageObj.src = "./001.jpg"
         console.log(imageObj)
-        ctx.font = "50px Roboto";
-        ctx.fillStyle = "white";
-        ctx.fillText(id, 10, 50);
+        // ctx.font = "50px Roboto";
+        // ctx.fillStyle = "white";
+        // ctx.fillText(id, 10, 50);
         console.log(ctx)
     }
 
     // {"id":1, "data": "hello world"}
-    // function downloadFile(id) {
-    //     console.log(`Downloading Question: ${id}`)
-    //     const a = document.createElement("a");
-    //     document.body.appendChild(a);
-    //     a.href = canvas.toDataURL("image/jpeg");
-    //     // console.log(a)
-    //     a.download = `canvas-image${id}.jpeg`;
-    //     a.click();
-    //     document.body.removeChild(a);
-    // }
+    function downloadFile(id) {
+        console.log(`Downloading Question: ${id}`)
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.href = canvasRef.current.toDataURL("image/jpeg");
+        // console.log(a)
+        a.download = `canvas-image${id}.jpeg`;
+        a.click();
+        document.body.removeChild(a);
+    }
 
     // function storingCanvas(canvas, id) {
     //     console.log(`Storing Canvas in useState for ID: ${id}`)
@@ -73,7 +74,7 @@ function Question({ id }) {
             <canvas id={id} ref={canvasRef} width="500" height="500">
             </canvas>
             <br></br>
-            {/* <button id='downloadbtn' onClick={() => { downloadFile(id) }}>Download</button> */}
+            <button id='downloadbtn' onClick={() => { downloadFile(id) }}>Download</button>
         </div>
     );
 }
